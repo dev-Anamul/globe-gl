@@ -1,0 +1,64 @@
+<head>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .main {
+      display: flex;
+    }
+
+    #content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .heading {
+      text-align: center;
+      display: block;
+    }
+  </style>
+
+  <!-- <script src="//unpkg.com/globe.gl"></script> -->
+  <script src="./globe.gl.min.js"></script>
+</head>
+
+<body>
+  <div class="main">
+    <div id="globeViz"></div>
+    <div id="content">
+      <h1 class="heading">hello world</h1>
+    </div>
+  </div>
+
+  <script>
+    // Gen random data
+    const N = 300;
+    const gData = [...Array(N).keys()].map((data, i) => ({
+      lat: (Math.random() - 0.5) * 180,
+      lng: (Math.random() - 0.5) * 360,
+      size: Math.random() / 3,
+      color: ["white"][Math.round(Math.random() * 1)],
+      c_name: `Point - ${i}`,
+    }));
+
+    Globe()
+      .width([1200])
+      .height([900])
+      .globeImageUrl("./earth-night.jpg")
+      .pointsData(gData)
+      .pointRadius(0.18)
+      .onPointClick((point) => {
+        let content = document.getElementById("content");
+        content.innerHTML = `<h1 class="heading">${point?.c_name}</h1>`;
+      })
+      .onPointHover((point) => {
+        if (point) {
+          let content = document.getElementById("content");
+          content.innerHTML = `<h1 class="heading">${point?.c_name}</h1>`;
+        }
+      })
+      .pointAltitude("size")
+      .pointColor("color")(document.getElementById("globeViz"));
+  </script>
+</body>
