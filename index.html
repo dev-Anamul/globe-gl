@@ -19,7 +19,7 @@
     }
   </style>
 
-  <!-- <script src="//unpkg.com/globe.gl"></script> -->
+  <!-- <script src="https://github.com/dev-Anamul/globe-gl/blob/main/globe.gl.min.js"></script> -->
   <script src="./globe.gl.min.js"></script>
 </head>
 
@@ -45,7 +45,9 @@
     Globe()
       .width([1200])
       .height([900])
-      .globeImageUrl("./earth-night.jpg")
+      .globeImageUrl(
+        "https://raw.githubusercontent.com/dev-Anamul/globe-gl/refs/heads/main/earth-night.jpg"
+      )
       .pointsData(gData)
       .pointRadius(0.18)
       .onPointClick((point) => {
